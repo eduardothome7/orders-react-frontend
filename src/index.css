@@ -66,3 +66,46 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.card {
+  display: inline-block;
+  margin-right: 1.1pc;
+  border-radius: 5px;
+}
+
+.card.grey {
+  background: #292828;
+}
+
+.row {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem;
+}
+
+.col {
+  flex: 1;
+  padding: 1.2rem;
+}
+
+.nowrap {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.myCalendar {
+  background: #fff;
+  color: #ada6a6;
+}
+
+.myCalendar h5 {
+  color: #707070;
+}
+
+.myCalendar .row {
+}
+
+.myCalendar.gridItem {
+  
+}
