@@ -18,22 +18,46 @@ export default function RoomAgenda() {
 
   return (
     <div>
-      <div class="myCalendar">
-        <div className="row bg-white">
-        {/* {
-          room.calendar.map(day => (
-            <div className='col nowrap'>
-              <h5>{ day.title }</h5>
-              {
-                day.grids.map(grid => (
-                  <div className='gridItem'></div>
-                ))
-              }
-            </div>
-          ))
-        } */}
-        </div>
-      </div>
+      <table className="myCalendar">
+        <thead>
+          <tr>
+            <td></td>
+            {
+              room.grids[0].days.map(dayName => (
+                <td>
+                  {dayName.checked ? <strong>{dayName.date}</strong> : dayName.date}
+                </td>
+              ))
+            }
+          </tr>
+          <tr>
+            <td></td>
+            {
+              room.grids[0].days.map(dayName => (
+                <td>
+                  {dayName.checked ? <strong>{dayName.title}</strong> : dayName.title}
+                </td>
+              ))
+            }
+          </tr>
+        </thead>
+        <tbody>
+          {
+            room.grids.map(grid => (
+              <tr>
+                <td>{grid.start_at}</td>
+                {
+                  grid.days.map(day => (                    
+                    <td className={day.event ? 'gridItem checked' : 'gridItem'}>  
+                      {day.event ? <strong>Cliente 001</strong> : <small>Livre</small>}
+                    </td>
+                  ))
+                }
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
     </div>
   );
 }

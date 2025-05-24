@@ -86,6 +86,7 @@ button:focus-visible {
 .col {
   flex: 1;
   padding: 1.2rem;
+  white-space: nowrap;
 }
 
 .nowrap {
@@ -103,9 +104,22 @@ button:focus-visible {
   color: #707070;
 }
 
-.myCalendar .row {
+.myCalendar td {
+  padding: 20px 18px;
 }
 
-.myCalendar.gridItem {
-  
+.myCalendar .gridItem {
+  cursor: pointer;
+}
+
+.myCalendar .gridItem:hover {
+  background:#e0dfdf;
+}
+
+.myCalendar .gridItem.checked {
+  background: blue;
+}
+
+.myCalendar .gridItem.checked:hover {
+  background: purple;
 }
