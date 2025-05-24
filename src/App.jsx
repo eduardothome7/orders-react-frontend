@@ -20,7 +20,7 @@ function App() {
           closeOnClick
           pauseOnHover
           draggable
-          theme="light" // ou 'dark'
+          theme="dark" // ou 'dark'
       />
       <BrowserRouter>
         <Routes>

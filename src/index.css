@@ -116,13 +116,20 @@ button:focus-visible {
   background:#e0dfdf;
 }
 
-.myCalendar .gridItem.checked {
-  background: #3498db;
+.gridItem.event {
   color: #fff;
 }
 
-.myCalendar .gridItem.checked:hover {
-  background: #2980b9;
+.gridItem.event.pending {
+  background: #55efc4;
+}
+
+.gridItem.event.done {
+  background: #b2bec3;
+}
+
+.gridItem.event.done:hover {
+  background: #636e72;
 }
 
 .modal {

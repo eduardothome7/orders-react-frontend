@@ -19,6 +19,7 @@ export default function RoomAgenda() {
 
   const showEvent = (event) => {
     setShowEventModal(true)
+    console.log(event)
     setEventTarget(event)
   }
 
@@ -132,17 +133,38 @@ export default function RoomAgenda() {
               <tr>
                 <td>{grid.start_at}</td>
                 {
-                  grid.days.map(day => (                    
-                    <td className={day.event ? 'gridItem checked' : 'gridItem'} onClick={() => {
-                      if (day.event) {
-                        showEvent(day.event)
+                  grid.days.map(day => {
+                    var extraClass = null
+
+                    if (day.event) {
+                      if (!day.event.cancelable) {
+                        extraClass = 'event done'
                       } else {
-                        openNewEventModal(day, grid)
+                        extraClass = 'event pending'
                       }
-                    }}>
-                      {day.event ? <small><strong>#{day.event.id}</strong></small> : <small>Livre</small>}
-                    </td>
-                  ))
+                    }
+
+                    return (
+                      <td
+                        className={`gridItem ${extraClass}`}
+                        onClick={() => {
+                          if (day.event) {
+                            showEvent(day.event);
+                          } else {
+                            openNewEventModal(day, grid);
+                          }
+                        }}
+                      >
+                        {day.event ? (
+                          <small>
+                            <strong>#{day.event.id}</strong>
+                          </small>
+                        ) : (
+                          <small>Livre</small>
+                        )}
+                      </td>
+                    )
+                  })
                 }
               </tr>
             ))
@@ -176,7 +198,10 @@ export default function RoomAgenda() {
             <h3>Agendamento #{eventTarget.id}</h3>
             <p></p>
             <button className="transparent-button" onClick={closeModal}>Fechar</button>
-            <button className="danger" onClick={cancelEvent}>Cancelar</button>
+            {
+              eventTarget.cancelable && (
+                <button className="danger" onClick={cancelEvent}>Cancelar</button>
+            )}
           </div>
         </div>
       )}
