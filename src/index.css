@@ -132,6 +132,16 @@ button:focus-visible {
   background: #636e72;
 }
 
+.gridItem.notSelectable {
+  background: #95a5a6;
+  cursor: inherit !important;
+  color: #fff;
+}
+
+.gridItem.notSelectable:hover {
+  background: #95a5a6 !important;
+}
+
 .modal {
   position: fixed;
   top: 0;

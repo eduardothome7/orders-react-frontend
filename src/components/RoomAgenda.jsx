@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import moment from 'moment';
 
 export default function RoomAgenda() {
   const { id } = useParams();
@@ -111,7 +112,7 @@ export default function RoomAgenda() {
             {
               room.grids[0].days.map(dayName => (
                 <td>
-                  {dayName.checked ? <strong>{dayName.date}</strong> : dayName.date}
+                  {dayName.checked ? <strong>{ moment(dayName.date.date).format('DD/MM') }</strong> : moment(dayName.date.date).format('DD/MM') }
                 </td>
               ))
             }
@@ -142,6 +143,10 @@ export default function RoomAgenda() {
                       } else {
                         extraClass = 'event pending'
                       }
+                    } else {
+                      if (! day.editable) {
+                        extraClass = 'notSelectable'
+                      }
                     }
 
                     return (
@@ -149,9 +154,9 @@ export default function RoomAgenda() {
                         className={`gridItem ${extraClass}`}
                         onClick={() => {
                           if (day.event) {
-                            showEvent(day.event);
-                          } else {
-                            openNewEventModal(day, grid);
+                            showEvent(day.event)
+                          } else if (day.editable) {
+                            openNewEventModal(day, grid)
                           }
                         }}
                       >
@@ -160,7 +165,7 @@ export default function RoomAgenda() {
                             <strong>#{day.event.id}</strong>
                           </small>
                         ) : (
-                          <small>Livre</small>
+                          day.editable ? (<small>Livre</small>) : (<small>--/--</small>)
                         )}
                       </td>
                     )
@@ -176,7 +181,7 @@ export default function RoomAgenda() {
         <div className="modal">
           <div className="modal-content">
             <h3>Novo Agendamento</h3>
-            <p>{ dateEventTarget.date }</p>
+            <p>{ dateEventTarget.date.date }</p>
             <p>{ gridTarget.start_at } até { gridTarget.end_at }</p>
             <form onSubmit={handleSubmit}>
 
